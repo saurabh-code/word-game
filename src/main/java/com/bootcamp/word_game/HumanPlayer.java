@@ -35,9 +35,7 @@ public class HumanPlayer implements Player {
 	@Override
 	public int getSimilarity(String guess) {
 		System.out.print("How similar is this to you word => ");
-		int similarity = in.nextInt();
-		in.nextLine();
-		return similarity;
+		return WordUtils.countSimilarity(hiddenWord, guess);
 	}
 
 	@Override
