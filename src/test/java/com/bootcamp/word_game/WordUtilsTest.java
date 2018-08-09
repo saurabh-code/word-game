@@ -16,5 +16,5 @@ public class WordUtilsTest {
 		assertThat(WordUtils.countSimilarity("AABC", "ABC"), is(3));
 		assertThat(WordUtils.countSimilarity("BAC", "DZA"), is(1));
 	}
-
+	
 }

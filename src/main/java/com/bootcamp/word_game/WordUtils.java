@@ -24,4 +24,12 @@ public class WordUtils {
 		return fixedWord.equals(guessedWord);
 	}
 	
+	public static int countOfInvalidWordsToBeRemoved(List<String> dict, String guess, int similarity) {
+		return 0;
+	}
+
+	public static List<String> removeInvalidWords(List<String> dict, String guess, int similarity) {
+		return null;
+	}
 }
+
