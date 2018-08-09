@@ -20,7 +20,7 @@ public class SowPodsReader implements FileReader {
 		
 		while(sc.hasNextLine()) {
 			String word = sc.nextLine();
-			if (word.length() == 4 && uniqueCharacters(word)) {
+			if (word.length() == 5 && uniqueCharacters(word)) {
 				words.add(word);
 			}
 		}

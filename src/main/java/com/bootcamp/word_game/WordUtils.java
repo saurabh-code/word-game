@@ -27,14 +27,14 @@ public class WordUtils {
 	}
 	
 	public static int countOfInvalidWordsToBeRemoved(List<String> dict, String guess, int similarity) {
-		return (int) dict.stream()
-					.filter(s -> countSimilarity(guess, s) < similarity)
+		return (int) dict.parallelStream()
+					.filter(s -> countSimilarity(guess, s) != similarity)
 					.count();
 	}
 
 	public static List<String> removeInvalidWords(List<String> dict, String guess, int similarity) {
-		return dict.stream()
-					.filter(s -> countSimilarity(guess, s) >= similarity)
+		return dict.parallelStream()
+					.filter(s -> countSimilarity(guess, s) == similarity)
 					.collect(Collectors.toList());
 		}
 }
