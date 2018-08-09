@@ -21,11 +21,13 @@ public class Driver {
 		
 		while (true) {
 			String playerOneGuess = playerOne.guessWord(playerOneSimilarity);
+			System.out.println("Player One Guessed " + playerOneGuess);
 			playerOneSimilarity = playerCheckGuess(playerTwo, playerOneGuess);
 			
 			if (hasMatchEnded(playerOneSimilarity)) break;
 			
 			String playerTwoGuess = playerTwo.guessWord(playerTwoSimilarity);
+			System.out.println("Player Two Guessed " + playerTwoGuess);
 			playerTwoSimilarity = playerCheckGuess(playerOne, playerTwoGuess);
 			
 			if (hasMatchEnded(playerTwoSimilarity)) 	break;
