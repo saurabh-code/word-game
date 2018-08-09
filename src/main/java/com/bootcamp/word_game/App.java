@@ -6,8 +6,7 @@ package com.bootcamp.word_game;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         System.out.println( "Hello World!" );
     }
 }
