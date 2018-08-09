@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -45,6 +46,33 @@ public class WordUtilsTest {
 				"AAA", 
 				3), 
 				is(2));
+	}
+	
+	@Test
+	public void testRemoveInvalid() {
+		assertThat(WordUtils.removeInvalidWords(
+				Arrays.asList("BBB"),
+				"AAA", 
+				3),
+				is(Collections.emptyList()));
+		
+		assertThat(WordUtils.removeInvalidWords(
+				Arrays.asList("BBB", "AAC"), 
+				"AAA", 
+				3), 
+				is(Collections.emptyList()));
+		
+		assertThat(WordUtils.removeInvalidWords(
+				Arrays.asList("BBB", "AAC", "BBB"), 
+				"AAA", 
+				2), 
+				is(Arrays.asList("AAC")));
+		
+		assertThat(WordUtils.removeInvalidWords(
+				Arrays.asList("AAA", "AAC", "BBB"), 
+				"AAA", 
+				3), 
+				is(Arrays.asList("AAA")));
 	}
 	
 	
