@@ -7,6 +7,7 @@ package com.bootcamp.word_game;
 public class App 
 {
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        Driver driver = new Driver(new HumanPlayer(1), new HumanPlayer(2));
+        driver.playGame();
     }
 }
