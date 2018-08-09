@@ -25,7 +25,9 @@ public class WordUtils {
 	}
 	
 	public static int countOfInvalidWordsToBeRemoved(List<String> dict, String guess, int similarity) {
-		return 0;
+		return (int) dict.stream()
+					.filter(s -> countSimilarity(guess, s) < similarity)
+					.count();
 	}
 
 	public static List<String> removeInvalidWords(List<String> dict, String guess, int similarity) {
