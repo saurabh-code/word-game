@@ -16,32 +16,37 @@ public class Driver {
 		playerOne.chooseAWord();
 		playerTwo.chooseAWord();
 		
-		String playerOneGuess = playerOne.guessWord(0);
+		int playerOneSimilarity = 0;
+		int playerTwoSimilarity = 0;
 		
-		if (playerTwo.isCorrectGuess(playerOneGuess)) {
-			System.out.println("Player 2 wins");
-		} else {
-			System.out.println("Player 2 says your guess has " + playerTwo.getSimilarity(playerOneGuess) + " letters common");
+		while (true) {
+			String playerOneGuess = playerOne.guessWord(playerOneSimilarity);
+			playerOneSimilarity = playerCheckGuess(playerTwo, playerOneGuess);
+			
+			if (hasMatchEnded(playerOneSimilarity)) break;
+			
+			String playerTwoGuess = playerTwo.guessWord(playerTwoSimilarity);
+			playerTwoSimilarity = playerCheckGuess(playerOne, playerTwoGuess);
+			
+			if (hasMatchEnded(playerTwoSimilarity)) 	break;
 		}
 		
-		String playerTwoGuess = playerTwo.guessWord(0);
-		
-		if (playerOne.isCorrectGuess(playerTwoGuess)) {
-			System.out.println("Player 1 wins");
-		} else {
-			System.out.println("Player 1 says your guess has " + playerTwo.getSimilarity(playerOneGuess) + " letters common");
-		}
+		System.out.println("Game Over");
 	}
 	
-//	private int playerMakesGuess(Player player, int similarity) {
-//		String guess = player.guessWord(similarity);
-//		int nextSimilarity = -1;
-//		if (player.isCorrectGuess(guess)) {
-//			System.out.println("Player " + player.getPlayerId() + " has won");
-//		} else {
-//			nextSimilarity = player.getSimilarity(guess);
-//			System.out.println("Player ");
-//		}
-//	}
+	private int playerCheckGuess(Player player, String guess) {
+		int nextSimilarity = -1;
+		if (player.isCorrectGuess(guess)) {
+			System.out.println("Player " + player.getPlayerId() + " has won");
+		} else {
+			nextSimilarity = player.getSimilarity(guess);
+			System.out.println("Player " + player.getPlayerId() + " says your guess has " + nextSimilarity + " letters common");
+		}
+		return nextSimilarity;
+	}
+	
+	private boolean hasMatchEnded(int similarity) {
+		return similarity == -1;
+	}
 
 }
