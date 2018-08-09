@@ -12,7 +12,7 @@ import com.bootcamp.word_game.interfaces.FileReader;
 
 public class SowPodsReader implements FileReader {
 
-	public List<String> fetchLinesFromFile(String pathToFile) throws FileNotFoundException {
+	public List<String> fetchLinesFromFile(String pathToFile, int size) throws FileNotFoundException {
 		File file = new File(pathToFile);
 		Scanner sc = new Scanner(file);
 		
@@ -20,7 +20,7 @@ public class SowPodsReader implements FileReader {
 		
 		while(sc.hasNextLine()) {
 			String word = sc.nextLine();
-			if (word.length() == 5 && uniqueCharacters(word)) {
+			if (word.length() == size && uniqueCharacters(word)) {
 				words.add(word);
 			}
 		}

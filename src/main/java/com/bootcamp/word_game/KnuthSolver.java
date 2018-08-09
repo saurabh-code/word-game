@@ -1,8 +1,9 @@
 package com.bootcamp.word_game;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class KnuthSolver {
 
@@ -52,14 +53,24 @@ public class KnuthSolver {
 
     public String next(int guessSimilarity){
         if(currentWord == null){
-            Random rand = new Random();
-            currentWord = possibleOutcomes.get(rand.nextInt(possibleOutcomes.size()));
+            currentWord = makeRandomGuess(); 
+        } else if (possibleOutcomes.size() >= 2000) {
+        		currentWord = pruneAndSelect(() -> makeRandomGuess(), guessSimilarity);
         }
         else {
-            pruneList(guessSimilarity);
-            possibleOutcomes.remove(currentWord);
-            currentWord = selectBest();
+            currentWord = pruneAndSelect(() -> selectBest(), guessSimilarity);
         }
         return currentWord;
+    }
+    
+    private String makeRandomGuess() {
+    		Random rand = new Random();
+        return possibleOutcomes.get(rand.nextInt(possibleOutcomes.size()));
+    }
+    
+    private String pruneAndSelect(Supplier<String> nextWord, int guessSimilarity) {
+    		pruneList(guessSimilarity);
+        possibleOutcomes.remove(currentWord);
+        return nextWord.get();
     }
 }

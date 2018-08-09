@@ -14,10 +14,10 @@ public class AIPlayer implements Player {
     private static final String SOW_PODS = "src/resources/sowpods.txt";
     private KnuthSolver knuthSolver;
 
-    AIPlayer(){
+    AIPlayer(int difficulty){
         FileReader fileReader = new SowPodsReader();
         try {
-            dict = fileReader.fetchLinesFromFile(SOW_PODS);
+            dict = fileReader.fetchLinesFromFile(SOW_PODS, difficulty);
             knuthSolver = new KnuthSolver(dict);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

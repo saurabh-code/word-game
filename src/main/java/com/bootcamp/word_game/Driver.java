@@ -4,6 +4,8 @@ import com.bootcamp.word_game.interfaces.Player;
 
 public class Driver {
 	
+	private static final int MATCH_FOUND = -1;
+	
 	private Player playerOne;
 	private Player playerTwo;
 
@@ -20,35 +22,43 @@ public class Driver {
 		int playerTwoSimilarity = 0;
 		
 		while (true) {
-			String playerOneGuess = playerOne.guessWord(playerOneSimilarity);
-			System.out.println("Player One Guessed " + playerOneGuess);
-			playerOneSimilarity = playerCheckGuess(playerTwo, playerOneGuess);
-			
+			playerOneSimilarity = playerMakesGuess(playerOne, playerTwo, playerOneSimilarity);
 			if (hasMatchEnded(playerOneSimilarity)) break;
 			
-			String playerTwoGuess = playerTwo.guessWord(playerTwoSimilarity);
-			System.out.println("Player Two Guessed " + playerTwoGuess);
-			playerTwoSimilarity = playerCheckGuess(playerOne, playerTwoGuess);
-			
+			playerTwoSimilarity = playerMakesGuess(playerTwo, playerOne, playerTwoSimilarity);
 			if (hasMatchEnded(playerTwoSimilarity)) 	break;
 		}
 		
 		System.out.println("Game Over");
 	}
 	
+	private int playerMakesGuess(Player player, Player opponent, int previousSimilarity) {
+		String playerGuess = player.guessWord(previousSimilarity);
+		System.out.println("Player " +
+							player.getPlayerId() +
+							" Guessed " + playerGuess);
+		return playerCheckGuess(opponent, playerGuess);
+	}
+	
 	private int playerCheckGuess(Player player, String guess) {
 		int nextSimilarity = -1;
 		if (player.isCorrectGuess(guess)) {
-			System.out.println("Player " + player.getPlayerId() + " has won");
+			System.out.println("Player " + 
+								player.getPlayerId() + 
+								" has won");
 		} else {
 			nextSimilarity = player.getSimilarity(guess);
-			System.out.println("Player " + player.getPlayerId() + " says your guess has " + nextSimilarity + " letters common");
+			System.out.println("Player " + 
+								player.getPlayerId() + 
+								" says your guess has " + 
+								nextSimilarity + 
+								" letters common");
 		}
 		return nextSimilarity;
 	}
 	
 	private boolean hasMatchEnded(int similarity) {
-		return similarity == -1;
+		return similarity == MATCH_FOUND;
 	}
 
 }

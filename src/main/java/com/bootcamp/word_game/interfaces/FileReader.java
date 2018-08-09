@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface FileReader {
 
-	public List<String> fetchLinesFromFile(String pathToFile) throws FileNotFoundException;
+	public List<String> fetchLinesFromFile(String pathToFile, int size) throws FileNotFoundException;
 }
