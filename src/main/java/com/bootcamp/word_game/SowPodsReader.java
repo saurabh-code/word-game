@@ -3,6 +3,7 @@ package com.bootcamp.word_game;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,9 +20,27 @@ public class SowPodsReader implements FileReader {
 		
 		while(sc.hasNextLine()) {
 			String word = sc.nextLine();
-			words.add(word);
+			if (word.length() == 4 && uniqueCharacters(word)) {
+				words.add(word);
+			}
 		}
 		
 		return words;
 	}
+	
+	boolean uniqueCharacters(String str)
+    {
+        char [] chArray = str.toCharArray();
+        Arrays.sort(chArray);
+ 
+        for(int i=0; i<chArray.length-1; i++)
+        {
+            if (chArray[i] != chArray[i+1])
+                continue;
+            else
+                return false;
+        }
+        return true;
+    }
+	
 }
