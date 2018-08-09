@@ -2,6 +2,7 @@ package com.bootcamp.word_game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class WordUtils {
@@ -31,7 +32,13 @@ public class WordUtils {
 	}
 
 	public static List<String> removeInvalidWords(List<String> dict, String guess, int similarity) {
-		return null;
+		for (Iterator<String> iter = dict.listIterator(); iter.hasNext(); ) {
+	          String s = iter.next();
+	          if (countSimilarity(s, guess) < similarity) {
+	              iter.remove();
+	          }
+	      }
+		return dict;
 	}
 }
 
